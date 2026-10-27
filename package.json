@@ -1,0 +1,38 @@
+{
+  "name": "dsh-knowledge-workshop",
+  "version": "1.0.0",
+  "description": "DeepSeek Harness 知识库工作台插件 — 卡片式 Markdown 笔记管理，支持图片/视频上传、Agent 工具调用、ZIP 导入导出",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "install.ps1",
+    "install.sh"
+  ],
+  "keywords": ["dsh", "deepseek", "harness", "knowledge", "plugin", "markdown"],
+  "license": "Proprietary",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dsh": {
+    "bundle": { "patch": "./cordis.patch.yml" },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale"
+      ]
+    }
+  }
+}

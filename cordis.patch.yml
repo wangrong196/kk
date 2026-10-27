@@ -1,0 +1,4 @@
+- insert:
+    - id: knowledge-workshop
+      name: 'knowledge-workshop'
+      config: {}
