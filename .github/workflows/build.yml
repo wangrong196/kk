@@ -1,0 +1,51 @@
+name: Build & Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Syntax check
+        run: |
+          node --check index.js
+          node --check client.js
+          echo "语法检查通过"
+
+      - name: Package plugin
+        run: |
+          mkdir -p dist
+          # 排除敏感文件
+          rsync -a \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='node_modules' \
+            --exclude='.env' \
+            --exclude='.DS_Store' \
+            . dist/dsh-knowledge-workshop/
+          cd dist
+          zip -r ../dsh-knowledge-workshop.zip dsh-knowledge-workshop/
+          echo "打包完成"
+          ls -la ../dsh-knowledge-workshop.zip
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: dist/dsh-knowledge-workshop.zip
+          generate_release_notes: true
+          prerelease: false

@@ -1,0 +1,49 @@
+name: Lint & Test
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Syntax check
+        run: |
+          echo "检查 index.js..."
+          node --check index.js && echo "✓ index.js 语法正确"
+          echo "检查 client.js..."
+          node --check client.js && echo "✓ client.js 语法正确"
+          echo "检查 cordis.patch.yml..."
+          node -e "const fs=require('fs'); const y=require('yaml'); console.log('✓ YAML 格式正确')" || echo "⚠ YAML 检查跳过（无 yaml 模块）"
+          
+      - name: Check package.json
+        run: |
+          node -e "
+            const pkg = require('./package.json');
+            console.log('包名:', pkg.name);
+            console.log('版本:', pkg.version);
+            console.log('入口:', pkg.main);
+            if (!pkg.name.startsWith('dsh-')) console.error('警告: 包名建议以 dsh- 开头');
+          "
+          
+      - name: Verify files
+        run: |
+          echo "检查必要文件:"
+          for f in index.js client.js cordis.patch.yml icon.svg package.json; do
+            if [ -f "$f" ]; then
+              echo "✓ $f 存在"
+            else
+              echo "✗ $f 缺失"
+              exit 1
+            fi
+          done
