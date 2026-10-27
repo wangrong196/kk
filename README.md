@@ -2,6 +2,9 @@
 
 > DeepSeek Harness 知识库工作台插件 — 卡片式 Markdown 笔记管理，支持图片/视频上传、Agent 工具调用、ZIP 导入导出。
 
+[![GitHub stars](https://img.shields.io/github/stars/wangrong196/kk?style=social)](https://github.com/wangrong196/kk)
+[![License](https://img.shields.io/badge/License-Proprietary-blue)](./LICENSE.md)
+
 ## 功能特性
 
 | 功能 | 说明 |

@@ -24,8 +24,9 @@
   "author": "",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/wangrong196/kk.git"
   },
+  "homepage": "https://github.com/wangrong196/kk#readme",
   "dsh": {
     "bundle": { "patch": "./cordis.patch.yml" },
     "client": {
