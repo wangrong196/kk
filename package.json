@@ -19,7 +19,14 @@
     "install.ps1",
     "install.sh"
   ],
-  "keywords": ["dsh", "deepseek", "harness", "knowledge", "plugin", "markdown"],
+  "keywords": [
+    "dsh",
+    "deepseek",
+    "harness",
+    "knowledge",
+    "plugin",
+    "markdown"
+  ],
   "license": "Proprietary",
   "author": "",
   "repository": {
@@ -28,7 +35,9 @@
   },
   "homepage": "https://github.com/wangrong196/kk#readme",
   "dsh": {
-    "bundle": { "patch": "./cordis.patch.yml" },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
     "client": {
       "platform": "web",
       "inject": [
